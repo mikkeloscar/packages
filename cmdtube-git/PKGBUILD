@@ -10,9 +10,12 @@ pkgdesc="Simple commandline youtube search and player"
 arch=('any')
 url="https://github.com/mikkeloscar/$_gitname.git"
 license=('GPL')
-depends=($_py 'youtube-dl' "$_py-gdata")
+depends=($_py "$_py-gdata")
 makedepends=($_py "$_py-distribute" 'git')
-optdepends=('mplayer: default player')
+optdepends=('mplayer: default player',
+            'youtube-dl: required when using mplayer',
+            'vlc: to use vlc as player')
+backup=('etc/xdg/cmdtube/cmdtube.conf')
 
 _gitroot="git://github.com/mikkeloscar/$_gitname.git"
 
@@ -42,7 +45,7 @@ build() {
 
 package() {
   cd "$srcdir/$_gitname"
-  install -Dm644 cmdtube.conf "$pkgdir/etc/xdg/cmdtube.conf"
+  install -Dm644 cmdtube.conf "$pkgdir/etc/xdg/cmdtube/cmdtube.conf"
 }
 
 # vim:set ts=2 sw=2 et:
