@@ -22,7 +22,7 @@ provides=('deluge')
 conflicts=('deluge' 'deluge-svn')
 replaces=('deluge-svn')
 source=(deluge.tmpfiles.conf deluged deluge-web deluged.service deluge-web.service deluged.conf)
-install=deluge-stable.install
+install=$pkgname.install
 
 _gitroot="git://deluge-torrent.org/deluge.git"
 _gitname="deluge"
