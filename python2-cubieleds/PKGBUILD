@@ -1,0 +1,30 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+_py=python2
+_gitname=python-cubieleds
+_pyname=cubieleds
+
+pkgname=${_py}-cubieleds
+pkgver=0.1
+pkgrel=1
+pkgdesc="A module so control Cubieboard LEDs"
+arch=('any')
+url="https://github.com/mikkeloscar/${_gitname}.git"
+license=('GPL')
+depends=(${_py})
+makedepends=("${_py}-distribute")
+source=("http://pypi.python.org/packages/source/$(echo ${_pyname} | cut -c1)/${_pyname}/${_pyname}-${pkgver}.tar.gz")
+sha1sums=('e4adb0039684ec6facb84d84b8f4920e55390e43')
+
+build() {
+  cd "${srcdir}/${_pyname}-${pkgver}"
+  # build module
+  ${_py} setup.py build
+}
+
+package() {
+  cd "${srcdir}/${_pyname}-${pkgver}"
+  ${_py} setup.py install --prefix=/usr --root="${pkgdir}" --optimize=1 --skip-build
+}
+
+# vim:set ts=2 sw=2 et:
