@@ -1,0 +1,12 @@
+diff -upr linux-3.4.24.orig/kernel/printk.c linux-3.4.24/kernel/printk.c
+--- linux-3.4.24.orig/kernel/printk.c	2013-10-25 22:47:45.416932375 +0200
++++ linux-3.4.24/kernel/printk.c	2013-10-25 22:48:44.527767045 +0200
+@@ -61,7 +61,7 @@ void asmlinkage __attribute__((weak)) ea
+ 
+ /* We show everything that is MORE important than this.. */
+ #define MINIMUM_CONSOLE_LOGLEVEL 1 /* Minimum loglevel we let people use */
+-#define DEFAULT_CONSOLE_LOGLEVEL 7 /* anything MORE serious than KERN_DEBUG */
++#define DEFAULT_CONSOLE_LOGLEVEL 4 /* anything MORE serious than KERN_DEBUG */
+ 
+ DECLARE_WAIT_QUEUE_HEAD(log_wait);
+ 
