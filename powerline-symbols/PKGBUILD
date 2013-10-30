@@ -1,0 +1,37 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+_gitname=powerline
+_gitbranch=develop
+
+pkgname=powerline-symbols
+pkgver=866.db80fc9
+pkgrel=1
+pkgdesc="Powerline symbols"
+arch=('any')
+url="https://github.com/Lokaltog/${_gitname}"
+license=('MIT')
+depends=('fontconfig')
+install="${pkgname}.install"
+source=("${_gitname}::git://github.com/Lokaltog/${_gitname}.git#branch=${_gitbranch}"
+        "${install}")
+md5sums=('SKIP'
+         '61ac796fcdf54ba442599c7f05c6f7a5')
+
+pkgver() {
+	cd "${_gitname}"
+	echo "$(git rev-list --count ${_gitbranch}).$(git rev-parse --short ${_gitbranch})"
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+  # install fonts
+  install -dm755 "${pkgdir}"/etc/fonts/{conf.avail,conf.d}
+  install -dm755 "${pkgdir}/usr/share/fonts/OTF"
+
+  install -m644 "font/10-powerline-symbols.conf" "${pkgdir}/etc/fonts/conf.avail/"
+  install -m644 "font/PowerlineSymbols.otf" "${pkgdir}/usr/share/fonts/OTF/"
+  ln -s "${pkgdir}/etc/fonts/conf.avail/10-powerline-symbols.conf"\
+    "${pkgdir}/etc/fonts/conf.d/10-powerline-symbols.conf"
+}
+
+# vim: ts=2 sw=2 et:
