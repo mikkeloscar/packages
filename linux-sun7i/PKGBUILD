@@ -21,7 +21,7 @@ options=('!strip')
 source=("https://github.com/linux-sunxi/linux-sunxi/archive/${_commit}.tar.gz"
         'config')
 md5sums=('93c9018a6a9f250513d3474cfee6ed47'
-         '943464bcf6a38fc067c8d26ff0dfc64a')
+         '504ca6b1fa3933c073811352d3e3f436')
 
 prepare() {
   cd "${srcdir}/${_srcname}"
