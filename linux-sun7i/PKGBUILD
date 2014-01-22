@@ -4,7 +4,7 @@
 
 buildarch=4
 
-_commit=77a43694fca9db61560b546ca94809535d37de0f
+_commit=9cfbbed3b2b098774b04553843d2f4092b8f7fe8
 _srcname=linux-sunxi-${_commit}
 _kernelname=${pkgbase#linux}
 _mach="sun7i"
@@ -16,17 +16,22 @@ arch=('armv7h')
 url="https://github.com/linux-sunxi/linux-sunxi/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'uboot-mkimage')
-# optdepends=('bcmdhd-fw: Firmware for bcmdhd wlan chip')
+optdepends=('bcmdhd-fw: Firmware for bcmdhd wlan chip')
 options=('!strip')
 source=("https://github.com/linux-sunxi/linux-sunxi/archive/${_commit}.tar.gz"
-        'config')
-md5sums=('93c9018a6a9f250513d3474cfee6ed47'
-         '504ca6b1fa3933c073811352d3e3f436')
+        'config'
+        'working-bcmdhd-driver.patch')
+md5sums=('a40190d501993b35b0022889e2f64902'
+         '4ebe3e3d0e0588e92e1851572aa93b69'
+         'fd3917fa7fa6493e125bdb3b729a7c2d')
 
 prepare() {
   cd "${srcdir}/${_srcname}"
 
   cat "${srcdir}/config" > ./.config
+
+  # patch bcmdhd with a working version
+  patch -Np1 -i "${srcdir}/working-bcmdhd-driver.patch"
 
   # add pkgrel to extraversion
   #sed -ri "s|^(EXTRAVERSION =)(.*)|\1 \2-${pkgrel}|" Makefile
