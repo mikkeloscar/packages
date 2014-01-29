@@ -1,0 +1,31 @@
+# Maintainer: perlawk
+
+_pkgname=shark
+pkgname=${_pkgname}-svn
+pkgver=3.0
+pkgrel=1
+pkgdesc="SHARK is a fast, modular, feature-rich open-source C++ machine learning library"
+arch=('i686' 'x86_64')
+url="http://image.diku.dk/shark"
+license=('GPL3')
+depends=('boost' 'cmake')
+makedepends=('subversion')
+source=("${_pkgname}::svn+https://svn.code.sf.net/p/shark-project/code/trunk/Shark")
+md5sums=('SKIP')
+
+build() {
+    cd "${srcdir}/${_pkgname}"
+    # cmake -DOPT_ENABLE_ATLAS=ON -DOPT_ENABLE_OPENMP=ON
+    cmake -DOPT_ENABLE_OPENMP=ON
+    make
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}"
+    make DESTDIR="${pkgdir}" install
+
+    # Move to sane location and clean up
+    mv "${pkgdir}"/usr/local/* "${pkgdir}/usr/"
+    rm -r "${pkgdir}/usr/local"
+    rm -r "${pkgdir}/usr/bin"
+}
