@@ -1,8 +1,8 @@
 # arg 1:  the new package version
 # arg 2:  the old package version
 
-KERNEL_NAME=
-KERNEL_VERSION=3.4.75-ARCH
+KERNEL_NAME=-sun7i
+KERNEL_VERSION=3.4.75-1-ARCH
 
 post_install () {
   # updating module dependencies
