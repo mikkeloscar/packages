@@ -7,20 +7,20 @@ url="https://github.com/linux-sunxi/linux-sunxi/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'uboot-mkimage' 'pigz')
 options=('!strip')
-_commit=9cfbbed3b2b098774b04553843d2f4092b8f7fe8
+_commit=0c92978520e9576a0631da949c13e79bae846494
 _srcname=linux-sunxi-${_commit}
 source=("https://github.com/linux-sunxi/linux-sunxi/archive/${_commit}.tar.gz"
         'config'
         'working-bcmdhd-driver.patch'
         'http://arch.moscar.net/bin/ap6210.tar.xz')
 noextract=("ap6210.tar.xz")
-md5sums=('a40190d501993b35b0022889e2f64902'
-         '4ebe3e3d0e0588e92e1851572aa93b69'
-         'fd3917fa7fa6493e125bdb3b729a7c2d'
+md5sums=('07395a4423edc56b183fde78dac98af0'
+         '90e542609f029105ccfdf1b3259456f0'
+         '07c260ca97572a830778362c7b744f9c'
          'f36f0a34ade7083e33aa0585c300b7dd')
 KARCH=arm
 _kernelname=${pkgbase#linux}
-pkgver=3.4.75
+pkgver=3.4.79
 
 pkgver() {
   cd "${srcdir}/${_srcname}"
