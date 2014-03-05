@@ -1,7 +1,11 @@
+# Contributer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+buildarch=4
+
 _mach='sun7i'
 pkgbase="linux-${_mach}"
-pkgname=("${pkgbase}" "${pkgbase}-firmware" "${pkgbase}-headers")
-pkgrel=2
+pkgname=("${pkgbase}" "${pkgbase}-headers")
+pkgrel=1
 arch=('armv7h')
 url="https://github.com/linux-sunxi/linux-sunxi/"
 license=('GPL2')
@@ -11,13 +15,10 @@ _commit=8ea347bcb4b4a5e50ec0343afac579e933ce8402
 _srcname=linux-sunxi-${_commit}
 source=("https://github.com/linux-sunxi/linux-sunxi/archive/${_commit}.tar.gz"
         'config'
-        'working-bcmdhd-driver.patch'
-        'http://arch.moscar.net/bin/ap6210.tar.xz')
-noextract=("ap6210.tar.xz")
+        'working-bcmdhd-driver.patch')
 md5sums=('a6f18158a7f8dcb552547ea958c24c6b'
          'dfc39a76f8b27df57dd908249744846c'
-         '07c260ca97572a830778362c7b744f9c'
-         'f36f0a34ade7083e33aa0585c300b7dd')
+         '07c260ca97572a830778362c7b744f9c')
 KARCH=arm
 _kernelname=${pkgbase#linux}
 pkgver=3.4.79
@@ -52,8 +53,7 @@ eval "package_${pkgbase}() { _package-linux; }"
 _package-linux() {
   pkgdesc="The Linux Kernel and modules for devices with ${_mach} SoC."
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
-  optdepends=('crda: to set the correct wireless channels of your country'
-              "linux-${_mach}-firmware")
+  optdepends=('crda: to set the correct wireless channels of your country')
   provides=('kernel26' "linux=${pkgver}" 'aufs_friendly')
   conflicts=('linux')
   install=${pkgname}.install
@@ -92,19 +92,6 @@ _package-linux() {
   # move module tree /lib -> /usr/lib
   mkdir -p "${pkgdir}/usr"
   mv "$pkgdir/lib" "$pkgdir/usr"
-}
-
-eval "package_${pkgbase}-firmware() { _package-firmware; }"
-_package-firmware() {
-  pkgdesc="Firmware files for linux-${_mach}"
-  provides=('linux-firmware=${pkgver}')
-  conflicts=('linux-firmware')
-  replaces=('linux-firmware')
-
-  cd "${srcdir}/${_srcname}"
-  mkdir -p "${pkgdir}/usr/lib"
-  cp -R "${srcdir}/${_srcname}/firmware" "${pkgdir}/usr/lib/firmware"
-  tar xf "${srcdir}/ap6210.tar.xz" -C "${pkgdir}/usr/lib/firmware/"
 }
 
 eval "package_${pkgbase}-headers() { _package-headers; }"
