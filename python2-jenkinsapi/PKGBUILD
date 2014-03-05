@@ -14,7 +14,7 @@ url="https://github.com/${_gituser}/${_gitname}"
 license=('MIT')
 depends=(${_py} "${_py}-requests" "${_py}-pytz")
 makedepends=("${_py}-distribute")
-source=("http://pypi.python.org/packages/source/$(echo ${_pyname} | cut -c1)/${_pyname}/${_pyname}-${pkgver}.tar.gz")
+source=("http://pypi.python.org/packages/source/j/${_pyname}/${_pyname}-${pkgver}.tar.gz")
 sha1sums=('92df49e023394857ab71912b3c77534bbb733afe')
 
 build() {
