@@ -3,8 +3,8 @@
 
 pkgname=binutils-arm-linux-gnueabihf-bin
 pkgver=2.24
-_ubuntuver=${pkgver}-1ubuntu1cross1.97
-pkgrel=1
+_ubuntuver=${pkgver}-2ubuntu3cross1.98
+pkgrel=2
 pkgdesc="GNU binary utilities, for arm-linux-gnueabihf target"
 arch=('i686' 'x86_64')
 url="http://packages.ubuntu.com/binutils-arm-linux-gnueabihf"
@@ -13,10 +13,10 @@ provides=('binutils-arm-linux-gnueabihf')
 conflicts=('binutils-arm-linux-gnueabihf')
 if [ "$CARCH" = "i686" ]; then
     source=("http://archive.ubuntu.com/ubuntu/pool/universe/b/binutils-armhf-cross/binutils-arm-linux-gnueabihf_${_ubuntuver}_i386.deb")
-    md5sums=('65c0f96901f77ec960a43d4d9d5c56b0')
+    md5sums=('bf0d0a06be90229c68477aa4f802437d')
 elif [ "$CARCH" = "x86_64" ]; then
     source=("http://archive.ubuntu.com/ubuntu/pool/universe/b/binutils-armhf-cross/binutils-arm-linux-gnueabihf_${_ubuntuver}_amd64.deb")
-    md5sums=('8ed7d69b7efcd2dfb2f7596b0481919f')
+    md5sums=('82f8e221d556c669dfba6afe1b466b3b')
 fi
 
 package() {
