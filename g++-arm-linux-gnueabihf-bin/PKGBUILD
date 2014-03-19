@@ -2,8 +2,8 @@
 
 pkgname=g++-arm-linux-gnueabihf-bin
 _basever=4.8
-pkgver=${_basever}.1
-_ubuntuver=${pkgver}-10ubuntu7cross0.10
+pkgver=${_basever}.2
+_ubuntuver=${pkgver}-16ubuntu4cross0.11
 pkgrel=1
 pkgdesc="The GNU C++ compiler for armhf architecture"
 arch=('i686' 'x86_64')
@@ -15,10 +15,10 @@ conflicts=('g++-arm-linux-gnueabihf')
 
 if [ "$CARCH" = "i686" ]; then
     source=("http://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-${_basever}-armhf-cross/g++-${_basever}-arm-linux-gnueabihf_${_ubuntuver}_i386.deb")
-    md5sums=('71692c129b10d8449e12a5c1164507e0')
+    md5sums=('b798e597fab883558e96dc66fbd8fce2')
 elif [ "$CARCH" = "x86_64" ]; then
     source=("http://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-${_basever}-armhf-cross/g++-${_basever}-arm-linux-gnueabihf_${_ubuntuver}_amd64.deb")
-    md5sums=('5a55561aa4b3fca2d0d5ec8fc69b6239')
+    md5sums=('f5a3fb1964be9b5add1745d9bc08fc31')
 fi
 
 package() {
