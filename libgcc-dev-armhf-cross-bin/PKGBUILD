@@ -10,7 +10,7 @@ pkgdesc="Development GCC support library for armhf architecture"
 arch=('any')
 url="http://packages.ubuntu.com/libgcc-${_basever}-dev-armhf-cross"
 license=('GPL2')
-options=('!strip')
+options=('!strip' 'staticlibs')
 source=("http://archive.ubuntu.com/ubuntu/pool/main/g/gcc-${_basever}-armhf-cross/libgcc-${_basever}-dev-armhf-cross_${_ubuntuver}_all.deb")
 md5sums=('09d74e8aa5a50405093bb638a14834ad')
 
