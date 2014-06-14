@@ -3,7 +3,7 @@
 _gitname=binfmt-manager
 
 pkgname=$_gitname-git
-pkgver=r4.751f273
+pkgver=r6.71d0a30
 pkgrel=1
 pkgdesc="Register/unregister qemu-static executables with binfmt_misc"
 arch=('any')
@@ -22,9 +22,7 @@ pkgver() {
 package() {
   cd "${srcdir}/${_gitname}"
 
-  install -Dm755 binfmt_manager "$pkgdir/usr/bin/binfmt_manager"
-
-  install -Dm644 binfmt-manager@.service "$pkgdir/usr/lib/systemd/system/binfmt-manager@.service"
+  make DESTDIR="$pkgdir" install
 }
 
 # vim:set ts=2 sw=2 et:
