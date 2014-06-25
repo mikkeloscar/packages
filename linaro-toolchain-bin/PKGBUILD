@@ -1,0 +1,21 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+pkgname=linaro-toolchain-bin
+pkgver=4.9
+_release=2014.05
+_source="gcc-linaro-arm-linux-gnueabihf-${pkgver}-${_release}_linux"
+pkgrel=1
+pkgdesc="The GNU C compiler for armhf architecture"
+arch=('i686' 'x86_64')
+url="http://packages.ubuntu.com/gcc-arm-linux-gnueabihf"
+license=('GPL2')
+options=('!strip' 'staticlibs')
+source=("http://releases.linaro.org/14.05/components/toolchain/binaries/${_source}.tar.xz")
+md5sums=('d505d05777259accf94578f6d1bb3cb0')
+
+package() {
+    cd ${pkgdir}
+
+    mkdir -p ${pkgdir}/usr/local
+    cp -r ${srcdir}/${_source} ${pkgdir}/usr/local/
+}
