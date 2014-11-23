@@ -1,0 +1,44 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+_gitname=gokumail
+
+pkgname=$_gitname-git
+pkgver=r36.f481c3c
+pkgrel=1
+pkgdesc="Simple POP3 to IMAP proxy for KUmail"
+arch=('any')
+url="https://github.com/mikkeloscar/${_gitname}"
+license=('GPLv3')
+makedepends=("go" "git")
+backup=('etc/gokumail.conf')
+source=("git://github.com/mikkeloscar/${_gitname}.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_gitname}"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "${srcdir}/${_gitname}"
+
+  $_py setup.py build || exit 1
+}
+
+prepare() {
+  cd "${srcdir}/${_gitname}"
+  GOPATH="${srcdir}" go get -v -d
+}
+
+build() {
+  cd "${srcdir}/${_gitname}"
+  GOPATH="${srcdir}" go build
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:set ts=2 sw=2 et:
