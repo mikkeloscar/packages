@@ -7,6 +7,7 @@ pkgdesc="GTK3, GTK2, Metacity and Gnome-Shell themes based on Faenza"
 arch=("any")
 url="http://tiheum.deviantart.com/art/Gnome-Shell-Faience-255097456"
 license=("GPL3")
+depends=("gtk-engine-murrine")
 optdepends=("gnome-shell: Shell theme"
             "gtk-engine-unico: GTK3 theme"
             "gtk-engine-murrine: GTK2 theme"
