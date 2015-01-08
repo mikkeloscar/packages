@@ -3,7 +3,7 @@
 _gitname=binfmt-manager
 
 pkgname=$_gitname-git
-pkgver=r8.269ff5b
+pkgver=r9.ee2d0c7
 pkgrel=1
 pkgdesc="Register/unregister qemu-static executables with binfmt_misc"
 arch=('any')
