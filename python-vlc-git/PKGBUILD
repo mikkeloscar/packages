@@ -3,8 +3,8 @@
 _py=python
 _gitname=python
 
-pkgname=${_py}-vlc
-pkgver=r222.e4ce04b
+pkgname=${_py}-vlc-git
+pkgver=r229.47d3dc2
 pkgrel=1
 pkgdesc="Python bindings for VLC"
 arch=('any')
