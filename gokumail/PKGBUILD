@@ -19,12 +19,6 @@ pkgver() {
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
-build() {
-  cd "${srcdir}/${_gitname}"
-
-  $_py setup.py build || exit 1
-}
-
 prepare() {
   cd "${srcdir}/${_gitname}"
   GOPATH="${srcdir}" go get -v -d
