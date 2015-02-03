@@ -1,0 +1,172 @@
+# Maintainer: Daniel E. Shub <Daniel.Shub@nottingham.ac.uk>
+
+## matlab version
+_release=r2014b
+
+## The default installation behavior is to install all licensed products whether or not they have been downloaded. To install only a subset of licensed products set _partialinstall to be true and remove unwanted entries from the _products array.
+#_partialinstall=true
+_products=("Aerospace_Blockset"
+           "Aerospace_Toolbox"
+           "Bioinformatics_Toolbox"
+           "Control_System_Toolbox"
+           "Communications_System_Toolbox" # Added in r2011a
+           "Communications_Toolbox" # Removed in r2011a
+           "Computer_Vision_System_Toolbox" # Added in r2011a
+           "Curve_Fitting_Toolbox"
+           "DO_Qualification_Kit"
+           "Data_Acquisition_Toolbox"
+           "Database_Toolbox"
+           "Datafeed_Toolbox"
+           "DSP_System_Toolbox" # Added in r2011a
+           "Econometrics_Toolbox"
+           "Embedded_Coder" # Added in r2011a
+           "Filter_Design_HDL_Coder"
+           "Financial_Instruments_Toolbox" # Added in r2012b
+           "Financial_Toolbox"
+           "Fixed_Point_Designer" # Added in r2013a
+           "Fuzzy_Logic_Toolbox"
+           "Gauges_Blockset"
+           "Global_Optimization_Toolbox"
+           "HDL_Coder" # Added in r2012a
+           "HDL_Verifier" # Added in r2012a
+           "IEC_Certification_Kit"
+           "Image_Acquisition_Toolbox"
+           "Image_Processing_Toolbox"
+           "Instrument_Control_Toolbox"
+           "LTE_System_Toolbox" # Added in r2014a
+           "MATLAB"
+           "MATLAB_Builder_EX"
+           "MATLAB_Builder_JA"
+           "MATLAB_Builder_NE"
+           "MATLAB_Coder" # Added in r2011a
+           "MATLAB_Compiler"
+           "MATLAB_Distributed_Computing_Server"
+           "MATLAB_Production_Server" # Added in r2012b
+           "MATLAB_Report_Generator"
+           "Mapping_Toolbox"
+           "Model_Predictive_Control_Toolbox"
+           "Model_Based_Calibration_Toolbox"
+           "Neural_Network_Toolbox"
+           "OPC_Toolbox"
+           "Optimization_Toolbox"
+           "Parallel_Computing_Toolbox"
+           "Partial_Differential_Equation_Toolbox"
+           "Phased_Array_System_Toolbox" # Added in r2011a
+           "Polyspace_Bug_Finder" # Added in r2013b
+           "Polyspace_Code_Prover" # Added in r2013b
+           "RF_Toolbox"
+           "Real_Time_Windows_Target"
+           "Robust_Control_Toolbox"
+           "Signal_Processing_Toolbox"
+           "SimBiology"
+           "SimDriveline"
+           "SimElectronics"
+           "SimEvents"
+           "SimHydraulics"
+           "SimMechanics"
+           "SimPowerSystems"
+           "SimRF"
+           "Simscape"
+           "Simulink"
+           "Simulink_3D_Animation"
+           "Simulink_Code_Inspector" # Added in r2011b
+           "Simulink_Coder" # Added in r2011a
+           "Simulink_Control_Design"
+           "Simulink_Design_Optimization"
+           "Simulink_Design_Verifier"
+           "Simulink_PLC_Coder"
+           "Simulink_Real_Time" # Added in r2014a
+           "Simulink_Report_Generator"
+           "Simulink_Verification_and_Validation"
+           "Spreadsheet_Link_EX"
+           "Stateflow"
+           "Statistics_Toolbox"
+           "Symbolic_Math_Toolbox"
+           "System_Identification_Toolbox"
+           "SystemTest"
+           "Trading_Toolbox" # Added in r2013a
+           "Vehicle_Network_Toolbox"
+           "Wavelet_Toolbox"
+)
+
+_basename=matlab
+pkgname="${_basename}"
+pkgver=08.04.00 # r2014b
+pkgrel=1
+pkgdesc="A high-level language for numerical computation and visualization"
+arch=("x86_64")
+url="http://www.mathworks.com"
+license=(custom)
+makedepends=("gendesk")
+depends=("libxt"
+         "libxpm"
+         "libxmu"
+         "libxp"
+         "libxtst"
+         "libxrender"
+         "libxxf86vm"
+         "libxrandr")
+# gcc for r2014b
+_gccver=4.7
+# gfortran for r2014b
+_gfortranver=4.7
+
+optdepends=("alsa-lib: For sound"
+            "glu: For hardware accelerated OpenGL"
+            "xorg-fonts-100dpi: For adjustable font sizes in figures on a local xserver"
+            "gcc-libs: For MEX support"
+            "gcc${_gccver//./}: For MEX support"
+            "gcc-fortran${_gfortranver//./}: For MEX support")
+source=("${_basename}_${_release}.iso"
+        "${_basename}_${_release}.fik")
+md5sums=('SKIP' 'SKIP')
+
+_matlabdir="opt/${_basename}"
+_licensedir="usr/local/${_basename}/licenses"
+
+prepare() {
+  gendesk -n --pkgname "${pkgname}" --pkgdesc "${pkgdesc}" -f
+  sed -i "/^Exec=/ s,$, -desktop," "${srcdir}/${pkgname}.desktop"
+
+  sed -i "s,^# destinationFolder=,destinationFolder=${pkgdir}/${_matlabdir}," "${srcdir}/installer_input.txt"
+  sed -i "s/^# fileInstallationKey=/fileInstallationKey=$(cat ${_basename}_${_release}.fik)/" "${srcdir}/installer_input.txt"
+  sed -i "s/^# agreeToLicense=/agreeToLicense=yes/" "${srcdir}/installer_input.txt"
+  sed -i "s/^# mode=/mode=silent/" "${srcdir}/installer_input.txt"
+
+  if [ "${_partialinstall}" = true ]; then
+    echo "Building a package with a subset of the licensed products."
+    for _product in "${_products[@]}"; do
+      sed -i "/^#product.${_product}$/ s/^#//" "${srcdir}/installer_input.txt"
+      echo "The ${_product} product will be included in the package."
+    done
+  fi
+}
+
+package() {
+  ## The MATLAB installer can get confused if it cannot connect to an X display, even if it is running in silent mode
+  unset DISPLAY
+
+  "${srcdir}/install" -t -inputFile "${srcdir}/installer_input.txt" -mode silent
+
+  install -D -m644 "${pkgdir}/${_matlabdir}/license.txt" "${pkgdir}/usr/share/licenses/${_basename}/${_release}/LICENSE"
+
+  ln -s "/${_licensedir}" "${pkgdir}/${_matlabdir}/licenses"
+
+  install -d 755 "${pkgdir}/usr/bin/"
+  ln -s "/${_matlabdir}/bin/matlab" "${pkgdir}/usr/bin/${pkgname}"
+
+  # The icon file for the desktop launcher
+  local _icon=help/matlab/matlab_env/matlab_desktop_icon.png
+  local _iconfilename=$(basename "${_icon}")
+  local _iconextension="${_iconfilename##*.}"
+
+  install -Dm644 "${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+  install -Dm644 "${pkgdir}/${_matlabdir}/${_icon}" "${pkgdir}/usr/share/pixmaps/${pkgname}.${_iconextension}"
+
+  sed -i "s/CC='gcc'/CC='gcc-${_gccver}'/g" "${pkgdir}/${_matlabdir}/bin/mexopts.sh"
+  sed -i "s/CXX='g++'/CXX='g++-${_gccver}'/g" "${pkgdir}/${_matlabdir}/bin/mexopts.sh"
+  sed -i "s/FC='gfortran'/FC='gfortran-${_gfortranver}'/g" "${pkgdir}/${_matlabdir}/bin/mexopts.sh"
+
+  ## See $MATLABROOT/sys/os/glnxa64/README.libstdc++
+  rm ${pkgdir}/${_matlabdir}/sys/os/glnxa64/{libstdc++.so.6,libgcc_s.so.1,libgfortran.so.3.0.0}
+}
