@@ -1,0 +1,21 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+_repo=reactivision
+pkgname=tuio-processing
+pkgver=1.1.5
+pkgrel=1
+pkgdesc="TUIO Client for Processing"
+arch=('i686' 'x86_64')
+url="http://www.tuio.org/"
+license=('LGPL')
+depends=('processing')
+_srcname="TUIO11_Processing-${pkgver}"
+source=("http://downloads.sourceforge.net/${_repo}/${_srcname}.zip")
+noextract=(${_srcname})
+md5sums=('8f41057cd73cd515c165cac3770fd163')
+
+package() {
+    cd "${srcdir}"
+    mkdir -p "${pkgdir}/usr/share/processing/modes/java/libraries/"
+    unzip ${_srcname} -d "${pkgdir}/usr/share/processing/modes/java/libraries"
+}
