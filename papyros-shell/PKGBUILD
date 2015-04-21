@@ -9,8 +9,6 @@ url="https://github.com/papyros/papyros-shell"
 license=("GPL")
 depends=("qt5-base-git"
          "qt5-declarative-git"
-         "qt5-quickcontrols-git"
-         "qt5-graphicaleffects-git"
          "qt5-wayland-git"
          "gsettings-qt-bzr"
          "qml-material"
