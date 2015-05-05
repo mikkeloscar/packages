@@ -1,0 +1,29 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+pkgname=frederiksberg-beamer-theme
+pkgver=2.2
+pkgrel=1
+pkgdesc="The Frederiksberg beamer theme (including ics unit)"
+arch=('any')
+url="http://www.matdat.life.ku.dk/LaTeX/Frederiksberg/"
+license=('custom')
+makedepends=("texlive-core")
+intell=$pkgname.install
+source=('http://www.matdat.life.ku.dk/LaTeX/Frederiksberg/download/Frederiksberg-2-2.tgz'
+        'http://www.matdat.life.ku.dk/LaTeX/Frederiksberg/download/units/ics.tgz')
+sha1sums=('e8bb87e685016bea44015faa19ab0fb5bdbbb2c9'
+          '811e73ff34b7a1974cb29e031e9a052cb35f1428')
+
+package() {
+  cd "$srcdir"
+
+  # tex folder
+  mkdir -p $pkgdir/usr/share/texmf/tex/latex/beamer/
+  cp -r tex/latex/beamer/Frederiksberg $pkgdir/usr/share/texmf/tex/latex/beamer/
+
+  # divps folder
+  mkdir -p $pkgdir/usr/share/texmf/dvips
+  cp -r dvips/Frederiksberg $pkgdir/usr/share/texmf/dvips/
+}
+
+# vim:set ts=2 sw=2 et:
