@@ -8,7 +8,7 @@ arch=('any')
 url="http://www.matdat.life.ku.dk/LaTeX/Frederiksberg/"
 license=('custom')
 makedepends=("texlive-core")
-intell=$pkgname.install
+install=${pkgname}.install
 source=('http://www.matdat.life.ku.dk/LaTeX/Frederiksberg/download/Frederiksberg-2-2.tgz'
         'http://www.matdat.life.ku.dk/LaTeX/Frederiksberg/download/units/ics.tgz')
 sha1sums=('e8bb87e685016bea44015faa19ab0fb5bdbbb2c9'
