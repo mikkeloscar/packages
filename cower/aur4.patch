@@ -1,0 +1,23 @@
+diff --git a/cower.c b/cower.c
+index 11b3d4b..0153fc6 100644
+--- a/cower.c
++++ b/cower.c
+@@ -67,7 +67,7 @@ static inline void freep(void *p) { free(*(void**) p); }
+ 	#define PACMAN_CONFIG       "/etc/pacman.conf"
+ #endif
+ 
+-#define AUR_BASE_URL          "https://aur.archlinux.org"
++#define AUR_BASE_URL          "https://aur4.archlinux.org"
+ #define AUR_PKG_URL_FORMAT    AUR_BASE_URL "/packages/"
+ #define AUR_RPC_URL           AUR_BASE_URL "/rpc.php?type=%s&arg=%s&v=3"
+ 
+@@ -797,7 +797,8 @@ void *download(CURL *curl, void *arg)
+ 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curl_write_response);
+ 
+ 	result = queryresult->data;
+-	cwr_asprintf(&url, AUR_BASE_URL "%s", result->urlpath);
++	/* cwr_asprintf(&url, AUR_BASE_URL "%s", result->urlpath); */
++	cwr_asprintf(&url, "%s", result->urlpath);
+ 	curl_easy_setopt(curl, CURLOPT_URL, url);
+ 
+ 	cwr_printf(LOG_DEBUG, "[%s]: curl_easy_perform %s\n", (const char*)arg, url);
