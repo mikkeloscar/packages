@@ -1,5 +1,6 @@
 *.pkg.tar.xz
 *.tar.gz
+*.tar.gz.sig
 *.tgz
 *.tar.xz
 *.deb
