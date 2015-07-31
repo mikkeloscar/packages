@@ -1,14 +1,16 @@
-# $Id: PKGBUILD 239367 2015-05-15 03:36:45Z heftig $
 # Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Contributor: Daniel J Griffiths <ghost1227@archlinux.us>
 # Contributor: Corrado Primier <bardo@aur.archlinux.org>
 # Contributor: William Rea <sillywilly@gmail.com>
 
-_branch="raop2-v2-v6.0"
+# Note: The patch is based on https://github.com/mikkeloscar/pulseaudio-raop2
+# which is basically https://github.com/hfujita/pulseaudio-raop2 rebased to
+# pulseaudio v6.0
 
-pkgbase=pulseaudio-raop2
+_pkgbase=pulseaudio
+pkgbase=$_pkgbase-raop2
 pkgname=(pulseaudio-raop2 libpulse-raop2 pulseaudio-{gconf,zeroconf,lirc,xen,jack,bluetooth,equalizer}-raop2)
-pkgdesc="A featureful, general-purpose sound server (RAOP2)"
+pkgdesc="A featureful, general-purpose sound server with AirPlay/Airtunes/RAOP v2 patchset"
 pkgver=6.0
 pkgrel=1
 arch=(i686 x86_64)
@@ -19,11 +21,15 @@ makedepends=(libasyncns libcap attr libxtst libsm libsndfile libtool rtkit
              lirc openssl xenstore fftw orc json-c gtk3 webrtc-audio-processing
              check)
 options=(!emptydirs)
-source=("$pkgbase-$pkgver::git+https://github.com/mikkeloscar/pulseaudio-raop2.git#branch=$_branch")
-sha256sums=('SKIP')
+source=("$pkgbase-$pkgver::git+http://anongit.freedesktop.org/git/pulseaudio/pulseaudio.git#commit=v$pkgver"
+        raopv2.patch)
+sha256sums=('SKIP'
+            'a616505d2167df87f8bdaa6f0c674576fee14ac5e04a6d7e92e33ba0075b9127')
 
 prepare() {
   cd $pkgbase-$pkgver
+
+  patch -p1 < ../raopv2.patch
 
   ./autogen.sh
 }
