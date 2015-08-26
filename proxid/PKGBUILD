@@ -1,0 +1,30 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+pkgname=proxid
+pkgver=0.1.1
+pkgrel=1
+pkgdesc="Simple SSH tunnel manager"
+arch=('any')
+url="https://github.com/mikkeloscar/$pkgname"
+license=('GPLv3')
+makedepends=("go" "git")
+source=("git://github.com/mikkeloscar/$pkgname#tag=v$pkgver")
+sha1sums=('SKIP')
+
+prepare() {
+  cd "$srcdir/$pkgname"
+  GOPATH="$srcdir" go get -v -d
+}
+
+build() {
+  cd "$srcdir/$pkgname"
+  GOPATH="$srcdir" go build
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:set ts=2 sw=2 et:
