@@ -1,8 +1,8 @@
 diff --git a/src/Makefile.am b/src/Makefile.am
-index 5cb5564..694cb42 100644
+index 9df5ddd..f055d23 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -1110,8 +1110,12 @@ librtp_la_LDFLAGS = $(AM_LDFLAGS) -avoid-version
+@@ -1127,8 +1127,12 @@ librtp_la_LDFLAGS = $(AM_LDFLAGS) -avoid-version
  librtp_la_LIBADD = $(AM_LIBADD) libpulsecore-@PA_MAJORMINOR@.la libpulsecommon-@PA_MAJORMINOR@.la libpulse.la
  
  libraop_la_SOURCES = \
@@ -5567,10 +5567,10 @@ index f0ff95a..4e031d8 100644
  
  #endif
 diff --git a/src/pulsecore/core-util.c b/src/pulsecore/core-util.c
-index 9b16936..957e3e3 100644
+index ba31221..95793ad 100644
 --- a/src/pulsecore/core-util.c
 +++ b/src/pulsecore/core-util.c
-@@ -2907,6 +2907,26 @@ bool pa_in_system_mode(void) {
+@@ -2974,6 +2974,26 @@ bool pa_in_system_mode(void) {
      return !!atoi(e);
  }
  
@@ -5598,10 +5598,10 @@ index 9b16936..957e3e3 100644
  bool pa_str_in_list_spaces(const char *haystack, const char *needle) {
      char *s;
 diff --git a/src/pulsecore/core-util.h b/src/pulsecore/core-util.h
-index dcdc40e..516cd98 100644
+index d5a2d39..56b527f 100644
 --- a/src/pulsecore/core-util.h
 +++ b/src/pulsecore/core-util.h
-@@ -105,8 +105,8 @@ static inline const char *pa_strna(const char *x) {
+@@ -109,8 +109,8 @@ static inline const char *pa_strna(const char *x) {
      return x ? x : "n/a";
  }
  
@@ -5612,7 +5612,7 @@ index dcdc40e..516cd98 100644
  char *pa_split_spaces(const char *c, const char **state);
  
  char *pa_strip_nl(char *s);
-@@ -224,6 +224,7 @@ static inline bool pa_safe_streq(const char *a, const char *b) {
+@@ -228,6 +228,7 @@ static inline bool pa_safe_streq(const char *a, const char *b) {
  }
  
  bool pa_str_in_list_spaces(const char *needle, const char *haystack);
