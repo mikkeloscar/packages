@@ -49,7 +49,8 @@ build() {
     --disable-bluez4 \
     --disable-samplerate \
     --disable-rpath \
-    --disable-default-build-tests
+    --disable-default-build-tests \
+    DATADIRNAME=share
 
   # fight unused direct deps
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
