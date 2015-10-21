@@ -1,3 +1,4 @@
 post_install() {
-  git lfs init
+  echo "=> Remember to initialize git-lfs before use:"
+  echo "  git lfs init"
 }
