@@ -1,7 +1,7 @@
 # Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
 
 pkgname=gokumail
-pkgver=0.2.2
+pkgver=0.3.0
 pkgrel=1
 pkgdesc="Simple POP3 to IMAP proxy for KUmail"
 arch=('any')
@@ -9,7 +9,7 @@ url="https://github.com/mikkeloscar/$pkgname"
 license=('GPLv3')
 makedepends=("go" "git")
 optdepends=("postgresql: postgresql backend"
-             "mariadb: mariadb/mysql backend")
+            "mariadb: mariadb/mysql backend")
 backup=('etc/gokumail.conf')
 source=("git://github.com/mikkeloscar/$pkgname#tag=v$pkgver")
 sha1sums=('SKIP')
