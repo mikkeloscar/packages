@@ -5,13 +5,13 @@
 
 # Note: The patch is based on https://github.com/mikkeloscar/pulseaudio-raop2
 # which is basically https://github.com/hfujita/pulseaudio-raop2 rebased to
-# pulseaudio v6.0
+# pulseaudio v7.1
 
 _pkgbase=pulseaudio
 pkgbase=$_pkgbase-raop2
 pkgname=(pulseaudio-raop2 libpulse-raop2 pulseaudio-{gconf,zeroconf,lirc,xen,jack,bluetooth,equalizer}-raop2)
 pkgdesc="A featureful, general-purpose sound server with AirPlay/Airtunes/RAOP v2 patchset"
-pkgver=7.0
+pkgver=7.1
 pkgrel=1
 arch=(i686 x86_64)
 url="http://hfujita.github.io/pulseaudio-raop2/"
@@ -26,7 +26,7 @@ source=("$pkgbase-$pkgver::git+http://anongit.freedesktop.org/git/pulseaudio/pul
         raopv2.patch)
 sha256sums=('SKIP'
             '572ff890dbed1e4a5654b7ed4ea3b3f2a91c871fb2224799bc789c317bb49964'
-            'c787ae0c3ade18f16d902d56b0c4d833eebbeccad915d0c2e0a60acd6f7fd812')
+            '8a88962ac4f9918d781f2dd7059991d5d8f68569f1abbaf0bee92c589e140044')
 
 prepare() {
   cd $pkgbase-$pkgver
