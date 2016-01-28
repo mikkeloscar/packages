@@ -7,14 +7,12 @@ pre_install() {
 post_install() {
   echo "Adding docker user"
 
-  getent group drone &>/dev/null || /usr/sbin/groupadd -g 633 drone || return 1
-  getent passwd drone &>/dev/null || /usr/sbin/useradd -u 633 -g drone -c 'Drone' -s /sbin/nologin -d /var/lib/drone drone || return 1
+  getent group drone &>/dev/null || groupadd -g 633 drone &>/dev/null
+  getent passwd drone &>/dev/null || useradd -u 633 -g drone -s /sbin/nologin \
+    -d /var/lib/drone drone &>/dev/null
 
   # add drone to docker group
   gpasswd -a drone docker
-
-  mkdir -p /var/lib/drone
-  sudo chown -R drone:drone /var/lib/drone
 
   echo "---------------------------------------------------------"
   echo "1. Remember to modify the drone config: /etc/drone/dronerc"
