@@ -39,13 +39,13 @@ prepare() {
 
   cd $srcdir/src/github.com/drone/$_pkgname
 
-  GOPATH="$srcdir" GO15VENDOREXPERIMENT=1 make deps
-  GOPATH="$srcdir" GO15VENDOREXPERIMENT=1 make gen
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin GO15VENDOREXPERIMENT=1 make deps
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin GO15VENDOREXPERIMENT=1 make gen
 }
 
 build() {
   cd $srcdir/src/github.com/drone/$_pkgname
-  GOPATH="$srcdir" GO15VENDOREXPERIMENT=1 make build
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin GO15VENDOREXPERIMENT=1 make build
 }
 
 package() {
