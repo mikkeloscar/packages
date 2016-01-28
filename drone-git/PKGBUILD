@@ -1,0 +1,71 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+# Contributer: Sebastian Wilzbach <sebi at wilzbach dot me>
+
+pkgname=drone-git
+_pkgname=drone
+pkgver=v2107
+pkgrel=1
+pkgdesc="Drone is a Continuous Integration platform built on Docker, written in Go"
+arch=('i686' 'x86_64')
+url="http://github.com/drone/drone"
+license=('Apache 2')
+depends=('docker')
+makedepends=('git' 'go')
+provides=('drone')
+conflicts=('drone')
+backup=('etc/drone/dronerc')
+install='drone.install'
+source=('git+https://github.com/drone/drone.git'
+        'drone.service'
+        'dronerc')
+md5sums=('SKIP'
+         '7a854048928f9b6d5c82ad1fa34b3747'
+         '832875bf63947056f6617abf4df01790')
+
+# pkgver() {
+#   cd "$srcdir/$_pkgname"
+#   printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
+# }
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  echo "v"$(git rev-list --count master)
+}
+
+prepare() {
+  # setup local gopath
+  mkdir -p $srcdir/src/github.com/drone
+  ln -s $srcdir/$_pkgname $srcdir/src/github.com/drone/$_pkgname
+
+  cd $srcdir/src/github.com/drone/$_pkgname
+
+  GOPATH="$srcdir" GO15VENDOREXPERIMENT=1 make deps
+  GOPATH="$srcdir" GO15VENDOREXPERIMENT=1 make gen
+}
+
+build() {
+  cd $srcdir/src/github.com/drone/$_pkgname
+  GOPATH="$srcdir" GO15VENDOREXPERIMENT=1 make build
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  # server
+  install -Dm755 drone $pkgdir/usr/bin/droned
+
+  # license
+  install -Dm644 LICENSE $pkgdir/usr/share/$_pkgname
+  install -Dm644 README.md $pkgdir/usr/share/$_pkgname
+
+  # service
+  install -Dm644 $srcdir/drone.service $pkgdir/usr/lib/systemd/system/drone.service
+
+  # config
+  install -Dm600 $srcdir/dronerc $pkgdir/etc/drone/dronerc
+
+  # db path
+  mkdir -m 600 -p $pkgdir/var/lib/drone/
+}
+
+# vim:set ts=2 sw=2 et:
