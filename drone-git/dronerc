@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # server configuration
 
 SERVER_ADDR=":8000"

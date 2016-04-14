@@ -20,7 +20,7 @@ source=('git+https://github.com/drone/drone.git'
         'dronerc')
 md5sums=('SKIP'
          'ae07870810f2a48ff9ea7af29adf4e37'
-         '832875bf63947056f6617abf4df01790')
+         'f9cf2b16b8b47f82439192ef5cbcf7fc')
 
 # pkgver() {
 #   cd "$srcdir/$_pkgname"
