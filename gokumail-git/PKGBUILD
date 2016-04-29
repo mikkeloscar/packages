@@ -1,0 +1,39 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+_pkgname=gokumail
+pkgname=${_pkgname}-git
+pkgver=v54
+pkgrel=1
+pkgdesc="Simple POP3 to IMAP proxy for KUmail"
+arch=('any')
+url="https://github.com/mikkeloscar/$pkgname"
+license=('GPLv3')
+makedepends=("go" "git")
+optdepends=("postgresql: postgresql backend"
+            "mariadb: mariadb/mysql backend")
+backup=('etc/gokumail.conf')
+source=("git+https://github.com/mikkeloscar/${_pkgname}.git")
+sha1sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  echo "v"$(git rev-list --count master)
+}
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  GOPATH="$srcdir" go get -v -d
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  GOPATH="$srcdir" go build
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:set ts=2 sw=2 ft=sh et:
