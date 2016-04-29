@@ -11,6 +11,8 @@ license=('GPLv3')
 makedepends=("go" "git")
 optdepends=("postgresql: postgresql backend"
             "mariadb: mariadb/mysql backend")
+provides=($_pkgname)
+conflicts=($_pkgname)
 backup=('etc/gokumail.conf')
 source=("git+https://github.com/mikkeloscar/${_pkgname}.git")
 sha1sums=('SKIP')
