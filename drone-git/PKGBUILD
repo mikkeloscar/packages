@@ -3,7 +3,7 @@
 
 pkgname=drone-git
 _pkgname=drone
-pkgver=v2222
+pkgver=v2283
 pkgrel=1
 pkgdesc="Drone is a Continuous Integration platform built on Docker, written in Go"
 arch=('i686' 'x86_64')
@@ -52,7 +52,7 @@ package() {
   cd "$srcdir/$_pkgname"
 
   # server
-  install -Dm755 drone $pkgdir/usr/bin/droned
+  install -Dm755 drone/drone $pkgdir/usr/bin/droned
 
   # license
   install -Dm644 LICENSE $pkgdir/usr/share/$_pkgname
@@ -69,4 +69,4 @@ package() {
   chown -R 633:633 $pkgdir/var/lib/drone
 }
 
-# vim:set ts=2 sw=2 et:
+# vim:set ts=2 sw=2 ft=sh et:
