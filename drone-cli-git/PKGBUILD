@@ -3,7 +3,7 @@
 _pkgname=drone-cli
 pkgname=$_pkgname-git
 _goname=drone
-pkgver=r41.38d6ebf
+pkgver=r73.8d32ea9
 pkgrel=1
 pkgdesc="drone.io command line utility"
 arch=("i686" "x86_64")
