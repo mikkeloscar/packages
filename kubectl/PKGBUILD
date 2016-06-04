@@ -1,0 +1,40 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+_repo=kubernetes
+pkgname=kubectl
+pkgver=1.2.4
+pkgrel=1
+pkgdesc="kubectl controls the Kubernetes cluster manager"
+arch=('i686' 'x86_64')
+url="http://github.com/kubernetes/kubernetes"
+license=('Apache 2')
+makedepends=('git' 'go')
+source=("https://github.com/$_repo/$_repo/archive/v${pkgver}.tar.gz")
+md5sums=('1bb19f8400ae1e224c710d8e0a8579a1')
+
+prepare() {
+  # setup local gopath
+  mkdir -p $srcdir/src/github.com/$_repo
+  ln -s $srcdir/$_repo-$pkgver $srcdir/src/github.com/$_repo/$_repo
+
+  cd $srcdir/src/github.com/$_repo/$_repo/cmd/kubectl
+
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin go get -v
+}
+
+build() {
+  cd $srcdir/src/github.com/$_repo/$_repo/cmd/$pkgname
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin go build
+}
+
+package() {
+  cd "$srcdir/$_repo-$pkgver"
+
+  # server
+  install -Dm755 cmd/$pkgname/$pkgname $pkgdir/usr/bin/$pkgname
+
+  # license
+  install -Dm644 LICENSE $pkgdir/usr/share/$pkgname
+}
+
+# vim:set ts=2 sw=2 ft=sh et:
