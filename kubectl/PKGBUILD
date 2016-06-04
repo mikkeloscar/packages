@@ -24,7 +24,7 @@ prepare() {
 
 build() {
   cd $srcdir/src/github.com/$_repo/$_repo/cmd/$pkgname
-  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin go build
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin go build -ldflags "-s"
 }
 
 package() {
