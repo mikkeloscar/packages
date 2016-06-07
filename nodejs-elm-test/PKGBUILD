@@ -1,0 +1,19 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+pkgname=nodejs-elm-test
+_pkgname=elm-test
+pkgver=0.16.0
+pkgrel=1
+pkgdesc="Runs elm-test suites from Node.js"
+arch=(any)
+url="https://github.com/rtfeldman/node-elm-test"
+license=("custom")
+depends=('nodejs')
+makedepends=('npm')
+source=("http://registry.npmjs.org/$_pkgname/-/$_pkgname-$pkgver.tgz")
+sha256sums=('312c0e81a9f91684eb127f51f79219e461ef36b3c5e6e3d3f8678cef3026ed4d')
+noextract=("$_pkgname-$pkgver.tgz")
+
+package() {
+  npm install -g --user root --unsafe-perm --prefix "$pkgdir/usr" $_pkgname@$pkgver
+}
