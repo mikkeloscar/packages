@@ -1,0 +1,31 @@
+# Maintainer: Mikkel Oscar Lyderik Larsen <mikkel.larsen at zalando dot de>
+
+_pkgname=hipchat
+pkgname=hipchat2
+pkgver=2.2.1400
+pkgrel=1
+pkgdesc="Persistent group chat using XMPP (version 2)"
+arch=('x86_64')
+url="https://www.hipchat.com/linux"
+license=('custom')
+depends=('fontconfig' 'libgl' 'libltdl' 'libxslt' 'hicolor-icon-theme'
+         'libxcomposite' 'libxcursor' 'libxkbcommon' 'libxrandr' 'libxslt' 'libxss'
+         'libpulse' 'xcb-util-keysyms' 'nss')
+source=("http://downloads.hipchat.com/linux/apt/pool/main/h/hipchat/hipchat_${pkgver}_amd64.deb"
+        "license.html")
+sha1sums=('b4dc284282a0aa741a140ad8a133daaeb242a10c'
+          'd57436db297ab4313a5964bba05060e2c7e93e70')
+
+prepare() {
+  cd "${srcdir}"
+  mkdir "${_pkgname}-${pkgver}"
+  cd "${_pkgname}-${pkgver}"
+  tar xzf "${srcdir}"/data.tar.gz
+}
+
+package() {
+  install -D -m644 "${srcdir}/license.html" \
+          "${pkgdir}/usr/share/licenses/${_pkgname}/license.html"
+  cp -R "${srcdir}/${_pkgname}-${pkgver}"/{opt,usr} "${pkgdir}"
+  mkdir -p "${pkgdir}/usr/bin"
+}
