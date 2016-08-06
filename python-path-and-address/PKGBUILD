@@ -20,3 +20,5 @@ package() {
   cd "$srcdir/$_gitname-$pkgver"
   python setup.py install --root="$pkgdir/" --optimize=1
 }
+
+# vim:set sw=2 sts=2 ft=sh et:

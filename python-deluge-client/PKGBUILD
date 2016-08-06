@@ -33,4 +33,4 @@ package_python2-deluge-client() {
   python2 setup.py install --optimize=1 --prefix=/usr --root="${pkgdir}"
 }
 
-# vim:set sw=2 sts=2 et:
+# vim:set sw=2 sts=2 ft=sh et:
