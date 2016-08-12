@@ -4,6 +4,8 @@
 *.tar.gz.sig
 *.tgz
 *.tar.xz
+*.tar.bz2
 *.deb
 *.zip
+*.vbox-extpack
 */**/
