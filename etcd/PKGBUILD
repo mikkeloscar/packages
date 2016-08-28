@@ -41,4 +41,4 @@ package() {
   install -m644 ${pkgname}-${pkgver}/Documentation/*.md -t $pkgdir/usr/share/doc/$pkgname
 }
 
-# vim:set ts=2 sw=2 et:
+# vim:set sw=2 sts=2 ft=sh et:
