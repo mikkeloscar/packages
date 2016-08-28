@@ -9,3 +9,5 @@
 *.zip
 *.vbox-extpack
 */**/
+*.sample
+*.service

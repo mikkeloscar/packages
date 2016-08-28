@@ -1,0 +1,14 @@
+post_install() {
+    getent group etcd >/dev/null || groupadd -r etcd
+    getent passwd etcd >/dev/null || useradd -r -g etcd -s /sbin/nologin \
+      -m -d /var/lib/etcd -c "etcd user" etcd
+}
+
+post_upgrade() {
+    post_install
+}
+
+post_remove() {
+    getent passwd etcd >/dev/null && userdel etcd
+    getent group etcd >/dev/null && groupdel etcd
+}
