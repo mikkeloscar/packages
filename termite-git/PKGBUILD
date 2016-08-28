@@ -1,0 +1,32 @@
+# Maintainer: Daniel Micay <danielmicay@gmail.com>
+_gitname=termite
+pkgname=termite-git
+pkgver=11.34.g305f5cb
+pkgver() { cd $_gitname && git describe | sed 's/^v//; s/-/./g'; }
+pkgrel=1
+epoch=1
+pkgdesc="A simple VTE-based terminal"
+arch=('i686' 'x86_64')
+url="https://github.com/thestinger/termite/"
+license=('LGPL')
+depends=('vte3-ng' 'xdg-utils')
+makedepends=('git')
+provides=(termite termite-terminfo)
+conflicts=(termite termite-terminfo)
+backup=(etc/xdg/termite/config)
+source=("git+https://github.com/mikkeloscar/termite#branch=bugfix/non-us-keyboard-layout")
+md5sums=('SKIP')
+
+build() {
+  cd $_gitname
+  git submodule update --init
+  make
+}
+
+package() {
+  cd $_gitname
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -Dm644 config "$pkgdir/etc/xdg/termite/config"
+}
+
+# vim:set sw=2 sts=2 ft=sh et:
