@@ -1,0 +1,47 @@
+# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
+
+pkgname=helm-git
+_pkgname=helm
+pkgver=v2.0.0.alpha.4.r0.g60b4188
+pkgrel=1
+pkgdesc="The Kubernetes Package Manager"
+arch=('i686' 'x86_64')
+url="https://github.com/kubernetes/helm"
+license=('Apache 2')
+makedepends=('git' 'go' 'glide')
+provides=('helm')
+conflicts=('helm')
+source=('git+https://github.com/kubernetes/helm.git')
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  # setup local gopath
+  mkdir -p $srcdir/src/k8s.io
+  # go tool can't handle GOPATH with symlinks so we do this dance
+  cp -r $srcdir/$_pkgname $srcdir/src/k8s.io/$_pkgname
+  rm -rf $srcdir/$_pkgname
+  ln -s $srcdir/src/k8s.io/$_pkgname $srcdir/$_pkgname
+
+  cd $srcdir/src/k8s.io/$_pkgname
+  export GOPATH="$srcdir"
+
+  GOPATH="$srcdir" make bootstrap
+}
+
+build() {
+  cd $srcdir/src/k8s.io/$_pkgname
+  GOPATH="$srcdir" BINDIR="$srcdir/src/k8s.io/$_pkgname/bin" make build
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  install -Dm755 bin/$_pkgname $pkgdir/usr/bin/$_pkgname
+}
+
+# vim:set ts=2 sw=2 ft=sh et:
