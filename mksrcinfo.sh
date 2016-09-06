@@ -1,8 +1,10 @@
 #!/bin/bash
 
-for pkg in *; do
+pwd=$(dirname "$(realpath $0)")
+
+for pkg in $pwd/*; do
     if [ -d "${pkg}" ]; then
-        echo "Updating .SRCINFO for $pkg"
+        echo "Updating .SRCINFO for ${pkg#$pwd/}"
         cd ${pkg}
         mksrcinfo
         # strip line with creation date
