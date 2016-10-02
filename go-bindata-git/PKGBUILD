@@ -2,7 +2,7 @@
 
 _pkgname=go-bindata
 pkgname=${_pkgname}-git
-pkgver=v3.0.7.r72.ga0ff256
+pkgver=1.r194.a0ff256
 pkgrel=1
 pkgdesc="Converts any file into managable Go source code - git checkout"
 arch=('x86_64')
@@ -16,7 +16,7 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  printf "1.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
