@@ -11,3 +11,4 @@
 */**/
 *.sample
 *.service
+docker-machine-driver-kvm
