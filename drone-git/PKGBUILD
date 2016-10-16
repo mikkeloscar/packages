@@ -1,5 +1,4 @@
-# Maintainer: Mikkel Oscar Lyderik <mikkeloscar at gmail dot com>
-# Contributer: Sebastian Wilzbach <sebi at wilzbach dot me>
+# Maintainer: Mikkel Oscar Lyderik Larsen <m at moscar dot net>
 
 pkgname=drone-git
 _pkgname=drone
@@ -25,11 +24,6 @@ sha1sums=('SKIP'
           '4c20313a2c1b69232d17f897c0e6369d25495ecc'
           '280d0933a4afd361e48a35803e38a98162fed644'
           '4b58ec9c6a47e0bc5c8012d3448507c0442bd23c')
-
-# pkgver() {
-#   cd "$srcdir/$_pkgname"
-#   printf "%s" "$(git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g')"
-# }
 
 pkgver() {
   cd "$srcdir/$_pkgname"

@@ -5,7 +5,7 @@ pre_install() {
 
 ## arg 1:  the new package version
 post_install() {
-  echo "Adding docker user"
+  echo "Adding drone user"
 
   getent group drone &>/dev/null || groupadd -g 633 drone &>/dev/null
   getent passwd drone &>/dev/null || useradd -u 633 -g drone -s /sbin/nologin \
@@ -15,11 +15,12 @@ post_install() {
   gpasswd -a drone docker
 
   echo "---------------------------------------------------------"
-  echo "1. Remember to modify the drone config: /etc/drone/dronerc"
+  echo "1. Remember to modify the drone config: /etc/drone/server"
   echo "2. Remember to start docker: systemctl start docker"
-  echo "3. You need at least one auth provider [github/bitbucker/gitlab] enabled in your dronerc"
+  echo "3. You need at least one auth provider [github/bitbucker/gitlab] enabled in /etc/drone/server"
+  echo "4. Remember to start a drone agent. You can run a local agent with systemctl start drone-agent"
   echo ""
-  echo "You can enable both by: systemctl enable docker drone"
+  echo "You can enable all by: systemctl enable docker drone drone-agent"
   echo "---------------------------------------------------------"
 }
 
