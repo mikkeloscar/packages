@@ -2,7 +2,7 @@
 
 pkgname=drone-git
 _pkgname=drone
-pkgver=v2631
+pkgver=v2644
 pkgrel=1
 pkgdesc="Drone is a Continuous Integration platform built on Docker, written in Go"
 arch=('i686' 'x86_64')
@@ -43,14 +43,14 @@ prepare() {
 
 build() {
   cd $srcdir/src/github.com/drone/$_pkgname
-  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin make build_static
+  GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin go build -tags netgo -ldflags '-extldflags "-static"' -o drone-bin github.com/drone/drone/drone
 }
 
 package() {
   cd "$srcdir"
 
   # binary
-  install -Dm755 bin/drone $pkgdir/usr/bin/drone
+  install -Dm755 drone/drone-bin $pkgdir/usr/bin/drone
 
   # license
   install -Dm644 $_pkgname/LICENSE $pkgdir/usr/share/$_pkgname
