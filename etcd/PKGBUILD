@@ -3,31 +3,52 @@
 # Contributor: codekoala <codekoala at gmail dot com>
 
 pkgname=etcd
-pkgver=3.0.6
+pkgver=3.1.7
 pkgrel=1
 pkgdesc='A highly-available key value store for shared configuration and service discovery.'
 arch=('x86_64' 'i686' 'armv6h' 'armv7h')
 url='https://github.com/coreos/etcd'
 license=('Apache')
-makedepends=('go')
+makedepends=('go' 'glide')
 backup=('etc/etcd/etcd.conf.yml')
 install="${pkgname}.install"
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/coreos/${pkgname}/archive/v${pkgver}.tar.gz"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/contrib/systemd/${pkgname}.service"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/${pkgname}.conf.yml.sample")
-sha1sums=('059285c05b1e8c2e30e2c9a3b24d81dbc6ca97dd'
-          'd4f28c60d834f838ff913df8c99e7a88bc3d8fa6'
-          '791ef726ad005ea1f77e143abaabf3737f5a0e31')
+sha1sums=('e23906274da0285d5dd8a1db8c6e57232924defa'
+          'c32441eb5bc24e081db746a57352154b5ac6e70f'
+          '636d0338fba60f4ea69364f596cdbb094d44a03d')
+
+prepare() {
+  # setup local gopath
+  mkdir -p $srcdir/src/github.com/coreos
+  ln -s $srcdir/${pkgname}-${pkgver} $srcdir/src/github.com/coreos/$pkgname
+
+  cd $srcdir/src/github.com/coreos/$pkgname
+
+  GOPATH="$srcdir" glide install --strip-vendor
+  # PATH=$PATH:$GOPATH/bin make deps
+  # GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin make gen
+  # cd ${srcdir}/${pkgname}-${pkgver}
+  # export GOPATH="$(pwd)/_gopath"
+  # _COREOS="${GOPATH}/src/github.com/coreos"
+  # mkdir -p "${_COREOS}"
+  # ln -sf ${srcdir}/${pkgname}-${pkgver} "${_COREOS}/etcd"
+  # glide install --strip-vendor
+}
 
 build() {
-  cd ${srcdir}/${pkgname}-${pkgver}
-  export GOPATH="$(pwd)/_gopath"
-  _COREOS="${GOPATH}/src/github.com/coreos"
-  mkdir -p "${_COREOS}"
-  ln -sf ${srcdir}/${pkgname}-${pkgver} "${_COREOS}/etcd"
-  go get -v github.com/coreos/etcd
-  # Note: this script may produce no output
-  bash -x ./build
+  cd $srcdir/src/github.com/coreos/$pkgname
+  GOPATH="$srcdir" ./build
+  # PATH=$PATH:$GOPATH/bin go build -tags netgo -ldflags '-extldflags "-static"' -o drone-bin github.com/drone/drone/drone
+  # cd ${srcdir}/${pkgname}-${pkgver}
+  # export GOPATH="$(pwd)/_gopath"
+  # _COREOS="${GOPATH}/src/github.com/coreos"
+  # mkdir -p "${_COREOS}"
+  # ln -sf ${srcdir}/${pkgname}-${pkgver} "${_COREOS}/etcd"
+  # glide install --strip-vendor
+  # # Note: this script may produce no output
+  # bash -x ./build
 }
 
 package() {
