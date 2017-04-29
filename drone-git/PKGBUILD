@@ -2,7 +2,7 @@
 
 pkgname=drone-git
 _pkgname=drone
-pkgver=v2644
+pkgver=v2826
 pkgrel=1
 pkgdesc="Drone is a Continuous Integration platform built on Docker, written in Go"
 arch=('i686' 'x86_64')
