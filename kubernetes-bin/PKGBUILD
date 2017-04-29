@@ -1,10 +1,10 @@
 # Maintainer: Mikkel Oscar Lyderik Larsen <m@moscar.net>
 
-pkgname=kubernetes-server-bin
+pkgname=kubernetes-bin
 pkgver=1.6.2
 _contribver=0.7.0
 pkgrel=1
-pkgdesc="Production-Grade Container Scheduling and Management. Server Components."
+pkgdesc="Production-Grade Container Scheduling and Management - binary version."
 optdepends=('etcd: etcd cluster required to run Kubernetes')
 arch=('x86_64' 'i686')
 source=("https://github.com/kubernetes/kubernetes/archive/v$pkgver.tar.gz"
@@ -19,6 +19,8 @@ backup=('etc/kubernetes/apiserver'
         'etc/kubernetes/kubelet'
         'etc/kubernetes/proxy'
         'etc/kubernetes/scheduler')
+provides=('kubernetes')
+conflicts=('kubernetes')
 install=kubernetes.install
 sha256sums=('2af4bcc196a90b78baf65d5bcdf6cbb613d71d3952a98813e15bb6a41f3b922c'
             '1d4e651ea59ea0d2b440e290fda5e166a21847891abca2907b8a1683c2252b8d'
@@ -28,7 +30,18 @@ sha256sums=('2af4bcc196a90b78baf65d5bcdf6cbb613d71d3952a98813e15bb6a41f3b922c'
 package() {
     cd $srcdir/kubernetes-$pkgver
 
-    binaries=(kube-proxy kube-apiserver kube-controller-manager kubelet kubeadm hyperkube kube-aggregator kube-scheduler kubefed)
+    binaries=(
+        kube-proxy
+        kube-apiserver
+        kube-controller-manager
+        kubelet
+        kubeadm
+        hyperkube
+        kube-aggregator
+        kube-scheduler
+        kubefed
+        kubectl
+    )
     for bin in "${binaries[@]}"; do
         install -Dm755 $srcdir/kubernetes/server/bin/$bin $pkgdir/usr/bin/$bin
     done
