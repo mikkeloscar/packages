@@ -3,7 +3,7 @@
 # Contributor: codekoala <codekoala at gmail dot com>
 
 pkgname=etcd
-pkgver=3.1.7
+pkgver=3.1.8
 pkgrel=1
 pkgdesc='A highly-available key value store for shared configuration and service discovery.'
 arch=('x86_64' 'i686' 'armv6h' 'armv7h')
@@ -15,9 +15,9 @@ install="${pkgname}.install"
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/coreos/${pkgname}/archive/v${pkgver}.tar.gz"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/contrib/systemd/${pkgname}.service"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/${pkgname}.conf.yml.sample")
-sha1sums=('e23906274da0285d5dd8a1db8c6e57232924defa'
-          'c32441eb5bc24e081db746a57352154b5ac6e70f'
-          '636d0338fba60f4ea69364f596cdbb094d44a03d')
+sha256sums=('f68700f710dfd9c5fefb41a60e96f9d0c7907e6abe21518ab0a05f6e425a3d4e'
+            '400b28d6e643d1f60d89813e7acdf6b80c9bee42711e650a058101e7746173e9'
+            '0841c9defcfaea70d72acbfdf90a82042463018aee90611d0aad3b59c7edc64f')
 
 prepare() {
   # setup local gopath
