@@ -3,7 +3,7 @@
 # Contributor: codekoala <codekoala at gmail dot com>
 
 pkgname=etcd
-pkgver=3.1.8
+pkgver=3.2.0
 pkgrel=1
 pkgdesc='A highly-available key value store for shared configuration and service discovery.'
 arch=('x86_64' 'i686' 'armv6h' 'armv7h')
@@ -15,9 +15,9 @@ install="${pkgname}.install"
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/coreos/${pkgname}/archive/v${pkgver}.tar.gz"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/contrib/systemd/${pkgname}.service"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/${pkgname}.conf.yml.sample")
-sha256sums=('f68700f710dfd9c5fefb41a60e96f9d0c7907e6abe21518ab0a05f6e425a3d4e'
+sha256sums=('b047756eea4d1592d373582e3300c0aec58c508e6a08bf6582c08d3571f3578d'
             '400b28d6e643d1f60d89813e7acdf6b80c9bee42711e650a058101e7746173e9'
-            '0841c9defcfaea70d72acbfdf90a82042463018aee90611d0aad3b59c7edc64f')
+            'ef251ee7a9e4ba03ec98af5b61ef291a85cf5bf3f216cbc3c876aab1dec3ab8d')
 
 prepare() {
   # setup local gopath
@@ -27,28 +27,11 @@ prepare() {
   cd $srcdir/src/github.com/coreos/$pkgname
 
   GOPATH="$srcdir" glide install --strip-vendor
-  # PATH=$PATH:$GOPATH/bin make deps
-  # GOPATH="$srcdir" PATH=$PATH:$GOPATH/bin make gen
-  # cd ${srcdir}/${pkgname}-${pkgver}
-  # export GOPATH="$(pwd)/_gopath"
-  # _COREOS="${GOPATH}/src/github.com/coreos"
-  # mkdir -p "${_COREOS}"
-  # ln -sf ${srcdir}/${pkgname}-${pkgver} "${_COREOS}/etcd"
-  # glide install --strip-vendor
 }
 
 build() {
   cd $srcdir/src/github.com/coreos/$pkgname
   GOPATH="$srcdir" ./build
-  # PATH=$PATH:$GOPATH/bin go build -tags netgo -ldflags '-extldflags "-static"' -o drone-bin github.com/drone/drone/drone
-  # cd ${srcdir}/${pkgname}-${pkgver}
-  # export GOPATH="$(pwd)/_gopath"
-  # _COREOS="${GOPATH}/src/github.com/coreos"
-  # mkdir -p "${_COREOS}"
-  # ln -sf ${srcdir}/${pkgname}-${pkgver} "${_COREOS}/etcd"
-  # glide install --strip-vendor
-  # # Note: this script may produce no output
-  # bash -x ./build
 }
 
 package() {
