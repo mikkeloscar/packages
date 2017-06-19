@@ -1,0 +1,39 @@
+# Maintainer: Mikkel Oscar Lyderik Larsen <m at moscar dot net>
+
+_pkgname=lis
+pkgname=${_pkgname}-git
+pkgver=v48
+pkgrel=1
+pkgdesc="Backlight dim/undim daemon"
+arch=('any')
+url="https://github.com/mikkeloscar/$pkgname"
+license=('GPLv3')
+makedepends=("go" "git")
+provides=($_pkgname)
+conflicts=($_pkgname)
+backup=('etc/lis.conf')
+source=("git+https://github.com/mikkeloscar/${_pkgname}.git")
+sha1sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  echo "v"$(git rev-list --count master)
+}
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  GOPATH="$srcdir" go get -v -d
+}
+
+build() {
+  cd "$srcdir/$_pkgname"
+  GOPATH="$srcdir" make
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:set ts=2 sw=2 ft=sh et:
