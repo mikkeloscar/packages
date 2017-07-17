@@ -1,0 +1,44 @@
+# Maintainer: Mikkel Oscar Lyderik Larsen <m at moscar dot net>
+
+_github_org=kubernetes-incubator
+pkgname=cri-o
+pkgver=1.0.0_alpha.0
+_pkgver=${pkgver/_/-}
+pkgrel=1
+pkgdesc="Open Container Initiative-based implementation of Kubernetes Container
+Runtime Interface"
+arch=('any')
+url="https://github.com/${_github_org}/$pkgname"
+license=('Apache 2')
+makedepends=("go")
+depends=("runc" "btrfs-progs")
+source=("https://github.com/${_github_org}/$pkgname/archive/v${_pkgver}.tar.gz"
+        "cri-o.service")
+sha256sums=('782f7b1f823dd1a3087b125d5d3245f3bc0fd23a63fb326355964169f79c92d9'
+            '2eda47d507a042721a66dc52503d41e8c107f1f313f3b61c5227f6c91c17c793')
+
+prepare() {
+  # setup local gopath
+  mkdir -p $srcdir/src/github.com/${_github_org}
+  ln -s $srcdir/$pkgname-${_pkgver} $srcdir/src/github.com/${_github_org}/$pkgname
+
+  cd $srcdir/src/github.com/${_github_org}/$pkgname
+  GOPATH="$srcdir" make .install.md2man
+}
+
+build() {
+  cd $srcdir/src/github.com/${_github_org}/$pkgname
+  GOPATH="$srcdir" PATH=$PATH:$srcdir/bin make
+}
+
+package() {
+  cd "$srcdir/$pkgname-${_pkgver}"
+
+  # generate default config
+  ./crio config --default | sed 's#/usr/local/libexec#/usr/libexec#' > crio.conf
+
+  make DESTDIR="$pkgdir" PREFIX=$pkgdir/usr install install.config install.completions
+  install -Dm644 ../cri-o.service $pkgdir/usr/lib/systemd/system/cri-o.service
+}
+
+# vim:set ts=2 sw=2 ft=sh et:
