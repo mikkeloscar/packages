@@ -39,6 +39,7 @@ package() {
   ./crio config --default | sed 's#/usr/local/libexec#/usr/libexec#' > crio.conf
 
   make DESTDIR="$pkgdir" PREFIX=$pkgdir/usr install install.config install.completions
+  install -Dm644 "test/policy.json" $pkgdir/etc/containers/policy.json
   install -Dm644 ../cri-o.service $pkgdir/usr/lib/systemd/system/cri-o.service
 }
 
