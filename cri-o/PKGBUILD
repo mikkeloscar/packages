@@ -24,15 +24,12 @@ prepare() {
 
   cd $srcdir/src/github.com/${_github_org}/$pkgname
 
-  # make BUILDTAGS overwritable
-  sed -i 's#BUILDTAGS :=# BUILDTAGS ?=#' Makefile
-
   GOPATH="$srcdir" make .install.md2man
 }
 
 build() {
   cd $srcdir/src/github.com/${_github_org}/$pkgname
-  GOPATH="$srcdir" PATH=$PATH:$srcdir/bin BUILDTAGS="seccomp" make
+  GOPATH="$srcdir" PATH=$PATH:$srcdir/bin make
 }
 
 package() {
