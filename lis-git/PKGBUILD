@@ -2,13 +2,13 @@
 
 _pkgname=lis
 pkgname=${_pkgname}-git
-pkgver=v53
+pkgver=v56
 pkgrel=1
 pkgdesc="Backlight dim/undim daemon"
 arch=('any')
 url="https://github.com/mikkeloscar/$pkgname"
 license=('GPLv3')
-makedepends=("go" "git")
+makedepends=("go" "git" "dep")
 provides=($_pkgname)
 conflicts=($_pkgname)
 backup=('etc/lis.conf')
@@ -22,16 +22,17 @@ pkgver() {
 
 prepare() {
   # setup local gopath
-  mkdir -p $srcdir/src/github.com/mikkeloscar
-  ln -s $srcdir/$_pkgname $srcdir/src/github.com/mikkeloscar/$_pkgname
+  mkdir -p $srcdir/go/src/github.com/mikkeloscar
+  ln -s $srcdir/$_pkgname $srcdir/go/src/github.com/mikkeloscar/$_pkgname
 
-  cd $srcdir/src/github.com/mikkeloscar/$_pkgname
-  GOPATH="$srcdir" go get -v -d
+  cd $srcdir/go/src/github.com/mikkeloscar/$_pkgname
+  export GOPATH="$srcdir/go"
+  env && dep ensure -vendor-only -v
 }
 
 build() {
-  cd $srcdir/src/github.com/mikkeloscar/$_pkgname
-  GOPATH="$srcdir" make
+  cd $srcdir/go/src/github.com/mikkeloscar/$_pkgname
+  GOPATH="$srcdir/go" make
 }
 
 package() {

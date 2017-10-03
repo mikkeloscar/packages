@@ -8,6 +8,7 @@ pkgbase = lis-git
 	license = GPLv3
 	makedepends = go
 	makedepends = git
+	makedepends = dep
 	provides = lis
 	conflicts = lis
 	backup = etc/lis.conf
