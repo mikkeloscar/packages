@@ -2,7 +2,7 @@
 
 _pkgname=lis
 pkgname=${_pkgname}-git
-pkgver=v56
+pkgver=v65
 pkgrel=1
 pkgdesc="Backlight dim/undim daemon"
 arch=('any')
@@ -26,8 +26,7 @@ prepare() {
   ln -s $srcdir/$_pkgname $srcdir/go/src/github.com/mikkeloscar/$_pkgname
 
   cd $srcdir/go/src/github.com/mikkeloscar/$_pkgname
-  export GOPATH="$srcdir/go"
-  env && dep ensure -vendor-only -v
+  GOPATH="$srcdir/go" dep ensure -vendor-only -v
 }
 
 build() {
@@ -39,6 +38,8 @@ package() {
   cd "$srcdir/$_pkgname"
 
   make DESTDIR="$pkgdir" install
+  # install statefile dir
+  install -dm644 "$pkgdir/var/lib/lis"
 }
 
 # vim:set ts=2 sw=2 ft=sh et:
