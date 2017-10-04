@@ -2,7 +2,7 @@
 
 _pkgname=lis
 pkgname=${_pkgname}-git
-pkgver=v65
+pkgver=v66
 pkgrel=1
 pkgdesc="Backlight dim/undim daemon"
 arch=('any')
@@ -39,7 +39,7 @@ package() {
 
   make DESTDIR="$pkgdir" install
   # install statefile dir
-  install -dm644 "$pkgdir/var/lib/lis"
+  install -dm755 "$pkgdir/var/lib/lis"
 }
 
 # vim:set ts=2 sw=2 ft=sh et:
