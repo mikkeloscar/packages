@@ -2,7 +2,7 @@
 
 _github_org=kubernetes-incubator
 pkgname=cri-o
-pkgver=1.0.0_beta.0
+pkgver=1.0.0
 _pkgver=${pkgver/_/-}
 pkgrel=1
 pkgdesc="Open Container Initiative-based implementation of Kubernetes Container
@@ -14,7 +14,7 @@ makedepends=("go")
 depends=("runc" "ostree" "btrfs-progs")
 source=("https://github.com/${_github_org}/$pkgname/archive/v${_pkgver}.tar.gz"
         "cri-o.service")
-sha256sums=('7ebaf03fc3319115cfc2d6c8e8348834dd71e4d8be93b97938abda0ceb9a8d86'
+sha256sums=('e1d8b0273b77f1ebe9f844ecf29ae03241de92a5d44a06facee66b8242cf6ce8'
             '2eda47d507a042721a66dc52503d41e8c107f1f313f3b61c5227f6c91c17c793')
 
 prepare() {
