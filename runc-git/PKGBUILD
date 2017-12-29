@@ -4,7 +4,7 @@
 _github_org=opencontainers
 _pkgname=runc
 pkgname=${_pkgname}-git
-pkgver=v1.0.0.rc3.r180.g45bde006
+pkgver=v1.0.0.rc4.r196.ge6516b3d
 pkgrel=1
 pkgdesc="Container CLI tools"
 depends=('glibc')
