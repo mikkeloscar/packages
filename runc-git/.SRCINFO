@@ -1,5 +1,5 @@
 pkgbase = runc-git
-	pkgver = v1.0.0.rc4.r196.ge6516b3d
+	pkgver = v1.0.0.rc4.r217.ga618ab5a
 	pkgrel = 1
 	url = http://runc.io/
 	arch = x86_64
