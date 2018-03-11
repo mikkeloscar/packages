@@ -1,5 +1,5 @@
 pkgbase = lis-git
-	pkgver = v66
+	pkgver = v69
 	pkgrel = 1
 	url = https://github.com/mikkeloscar/lis-git
 	arch = any
