@@ -2,7 +2,7 @@
 
 _github_org=kubernetes-incubator
 pkgname=cri-o
-pkgver=1.9.5
+pkgver=1.9.9
 _pkgver=${pkgver/_/-}
 pkgrel=1
 pkgdesc="Open Container Initiative-based implementation of Kubernetes Container
@@ -13,7 +13,7 @@ license=('Apache 2')
 makedepends=("go")
 depends=("runc" "ostree" "btrfs-progs")
 source=("https://github.com/${_github_org}/$pkgname/archive/v${_pkgver}.tar.gz")
-sha256sums=('57b2b243b2ee97dde0eb55f11ddf42529c93d0993793565ee0ce44c44e23cff9')
+sha256sums=('be0b07825ed7b47c34eaa95bbc1045b2b515495c6a826903ecdc209ceb246574')
 
 prepare() {
   # setup local gopath

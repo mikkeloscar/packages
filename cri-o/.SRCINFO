@@ -1,5 +1,5 @@
 pkgbase = cri-o
-	pkgver = 1.9.5
+	pkgver = 1.9.9
 	pkgrel = 1
 	url = https://github.com/kubernetes-incubator/cri-o
 	arch = any
@@ -8,8 +8,8 @@ pkgbase = cri-o
 	depends = runc
 	depends = ostree
 	depends = btrfs-progs
-	source = https://github.com/kubernetes-incubator/cri-o/archive/v1.9.5.tar.gz
-	sha256sums = 57b2b243b2ee97dde0eb55f11ddf42529c93d0993793565ee0ce44c44e23cff9
+	source = https://github.com/kubernetes-incubator/cri-o/archive/v1.9.9.tar.gz
+	sha256sums = be0b07825ed7b47c34eaa95bbc1045b2b515495c6a826903ecdc209ceb246574
 
 pkgname = cri-o
 
