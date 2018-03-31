@@ -1,5 +1,5 @@
 pkgbase = etcd
-	pkgver = 3.3.2
+	pkgver = 3.3.3
 	pkgrel = 1
 	url = https://github.com/coreos/etcd
 	install = etcd.install
@@ -11,10 +11,10 @@ pkgbase = etcd
 	makedepends = go
 	makedepends = glide
 	backup = etc/etcd/etcd.conf.yml
-	source = etcd-3.3.2.tar.gz::https://github.com/coreos/etcd/archive/v3.3.2.tar.gz
-	source = https://github.com/coreos/etcd/raw/v3.3.2/contrib/systemd/etcd.service
-	source = https://github.com/coreos/etcd/raw/v3.3.2/etcd.conf.yml.sample
-	sha256sums = 5cdea1f091d8fa1657f73a7f8e5c070581b92ebd919976b85492e5e796b2944a
+	source = etcd-3.3.3.tar.gz::https://github.com/coreos/etcd/archive/v3.3.3.tar.gz
+	source = https://github.com/coreos/etcd/raw/v3.3.3/contrib/systemd/etcd.service
+	source = https://github.com/coreos/etcd/raw/v3.3.3/etcd.conf.yml.sample
+	sha256sums = 6551878987f860d1b47fbf10ec34b910399f642c6541d86d835e1b5c29bc25ed
 	sha256sums = 400b28d6e643d1f60d89813e7acdf6b80c9bee42711e650a058101e7746173e9
 	sha256sums = 3864cc70b02065ba3d3cf180eca42b27b60324280a16a25cd5b1bb110585cfdc
 
