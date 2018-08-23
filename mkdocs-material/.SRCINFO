@@ -1,0 +1,15 @@
+pkgbase = mkdocs-material
+	pkgver = 3.0.3
+	pkgrel = 1
+	url = http://squidfunk.github.io/mkdocs-material/
+	arch = any
+	license = MIT
+	makedepends = python-setuptools
+	depends = mkdocs
+	depends = python-pygments
+	depends = pymdown-extensions
+	source = https://github.com/squidfunk/mkdocs-material/archive/3.0.3.tar.gz
+	sha256sums = f1e51d2f8f29a3682269a958e49c0994e4ff6d14004753dc4cc3f6bf49d9c175
+
+pkgname = mkdocs-material
+
