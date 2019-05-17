@@ -3,7 +3,7 @@
 # Contributor: codekoala <codekoala at gmail dot com>
 
 pkgname=etcd
-pkgver=3.3.12
+pkgver=3.3.13
 pkgrel=1
 pkgdesc='A highly-available key value store for shared configuration and service discovery.'
 arch=('x86_64' 'i686' 'armv6h' 'armv7h')
@@ -15,7 +15,7 @@ install="${pkgname}.install"
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/coreos/${pkgname}/archive/v${pkgver}.tar.gz"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/contrib/systemd/${pkgname}.service"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/${pkgname}.conf.yml.sample")
-sha256sums=('0452a98bd485d757fd85d2182f8eac8c2dad315bcb6cf29a797ced9e2669c413'
+sha256sums=('02df2eb25d67dafc355d19a91791f686fcf59b04cea46110c3a11fcd5e365100'
             '400b28d6e643d1f60d89813e7acdf6b80c9bee42711e650a058101e7746173e9'
             '3864cc70b02065ba3d3cf180eca42b27b60324280a16a25cd5b1bb110585cfdc')
 
@@ -37,8 +37,6 @@ package() {
   install -Dm755 ${pkgname}-${pkgver}/bin/etcd $pkgdir/usr/bin/etcd
   install -Dm755 ${pkgname}-${pkgver}/bin/etcdctl $pkgdir/usr/bin/etcdctl
   install -Dm644 ${pkgname}-${pkgver}/LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
-  install -dm755 $pkgdir/usr/share/doc/$pkgname
-  install -m644 ${pkgname}-${pkgver}/Documentation/*.md -t $pkgdir/usr/share/doc/$pkgname
 }
 
 # vim:set sw=2 sts=2 ft=sh et:
