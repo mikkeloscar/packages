@@ -3,7 +3,7 @@
 # Contributor: codekoala <codekoala at gmail dot com>
 
 pkgname=etcd
-pkgver=3.4.4
+pkgver=3.4.5
 pkgrel=1
 pkgdesc='A highly-available key value store for shared configuration and service discovery.'
 arch=('x86_64' 'i686' 'armv6h' 'armv7h')
@@ -15,19 +15,18 @@ install="${pkgname}.install"
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/coreos/${pkgname}/archive/v${pkgver}.tar.gz"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/contrib/systemd/${pkgname}.service"
         "https://github.com/coreos/${pkgname}/raw/v${pkgver}/${pkgname}.conf.yml.sample")
-sha256sums=('46bcd0d034fe9cc6ae86a9f2a72bdc78761ca99bfd5ae4b96b24e4ad93fc627e'
+sha256sums=('2888f73dc52ba89da470d9bd40b1348ffe8b3da51cd8fe8bff5a1a8db2e50d46'
             'e107490b80d96494b9276c7478e2e4d368ef9254b50a7996ae9f3456ccc68e81'
             'd91862eedcd2d98523308dba0e4da4ce7a41554b74f52c62a9a69f175753da37')
 
 prepare() {
-  # setup local gopath
-  mkdir -p $srcdir/src/github.com/coreos
-  ln -s $srcdir/${pkgname}-${pkgver} $srcdir/src/github.com/coreos/$pkgname
+  cd "$srcdir/${pkgname}-${pkgver}"
+  rm -rf vendor
 }
 
 build() {
-  cd $srcdir/src/github.com/coreos/$pkgname
-  GOPATH="$srcdir" ./build
+  cd "$srcdir/${pkgname}-${pkgver}"
+  ./build
 }
 
 package() {
