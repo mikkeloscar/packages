@@ -1,5 +1,5 @@
 pkgbase = etcd
-	pkgver = 3.4.16
+	pkgver = 3.5.0
 	pkgrel = 1
 	url = https://github.com/coreos/etcd
 	install = etcd.install
@@ -10,12 +10,11 @@ pkgbase = etcd
 	license = Apache
 	makedepends = go
 	backup = etc/etcd/etcd.conf.yml
-	source = etcd-3.4.16.tar.gz::https://github.com/coreos/etcd/archive/v3.4.16.tar.gz
-	source = https://github.com/coreos/etcd/raw/v3.4.16/contrib/systemd/etcd.service
-	source = https://github.com/coreos/etcd/raw/v3.4.16/etcd.conf.yml.sample
-	sha256sums = 7dfb8597145ae5bc44b90a75765395271b8e33a57debcfef265a21a063417203
-	sha256sums = e107490b80d96494b9276c7478e2e4d368ef9254b50a7996ae9f3456ccc68e81
-	sha256sums = d91862eedcd2d98523308dba0e4da4ce7a41554b74f52c62a9a69f175753da37
+	source = etcd-3.5.0.tar.gz::https://github.com/coreos/etcd/archive/v3.5.0.tar.gz
+	source = https://github.com/coreos/etcd/raw/v3.5.0/contrib/systemd/etcd.service
+	source = https://github.com/coreos/etcd/raw/v3.5.0/etcd.conf.yml.sample
+	sha256sums = f30f68c52a7547af08be7d166884c94885ea8a593c1c1e814c89b24148ee1921
+	sha256sums = 6b2921568bd96f5bb48ba61d2b9673f42e49eb90fda35a7003fbac469a226a13
+	sha256sums = 1a532bf85dbb94fb370e1b69e4384e8bf5cd93b3cea778e9f9fc9dfe15009328
 
 pkgname = etcd
-
