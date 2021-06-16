@@ -13,4 +13,3 @@ pkgbase = virtualbox-ext-oracle
 pkgname = virtualbox-ext-oracle
 	depends = virtualbox
 	optdepends = rdesktop: client to connect vm via RDP
-

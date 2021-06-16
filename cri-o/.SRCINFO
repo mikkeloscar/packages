@@ -12,4 +12,3 @@ pkgbase = cri-o
 	sha256sums = be0b07825ed7b47c34eaa95bbc1045b2b515495c6a826903ecdc209ceb246574
 
 pkgname = cri-o
-

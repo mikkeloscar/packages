@@ -11,4 +11,3 @@ pkgbase = kubectl
 	md5sums = 1bb19f8400ae1e224c710d8e0a8579a1
 
 pkgname = kubectl
-

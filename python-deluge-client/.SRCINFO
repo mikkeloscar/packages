@@ -16,4 +16,3 @@ pkgname = python-deluge-client
 pkgname = python2-deluge-client
 	pkgdesc = Simple python 2 Deluge Client
 	depends = python2
-

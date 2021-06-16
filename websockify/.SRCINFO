@@ -12,4 +12,3 @@ pkgbase = websockify
 	sha1sums = 7efae9ab9fcf56d105f26038dc1f51ac9b6882a3
 
 pkgname = websockify
-

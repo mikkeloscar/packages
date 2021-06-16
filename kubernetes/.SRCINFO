@@ -24,4 +24,3 @@ pkgbase = kubernetes
 	sha256sums = f40b4b14a71f8138de69021e967d993e8b14db2cebe66eee20c7e66839ad1fde
 
 pkgname = kubernetes
-

@@ -11,4 +11,3 @@ pkgbase = scaleway-cli
 	sha256sums = a6c0e6d3ca785fe86804e89cc86e252761f3dace0884ac172b2635daf6783969
 
 pkgname = scaleway-cli
-

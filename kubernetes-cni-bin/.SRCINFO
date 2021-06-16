@@ -9,4 +9,3 @@ pkgbase = kubernetes-cni-bin
 	sha256sums_x86_64 = 08cbe5c42366ec3184cc91a4353f6e066f2d7325b4db1cb4f87c7dcc8c0eb620
 
 pkgname = kubernetes-cni-bin
-
